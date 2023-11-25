@@ -1,0 +1,137 @@
+<html>
+    <head>
+        <title>Sokoban</title>
+        
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                font-family: monospace;
+                box-sizing: border-box;
+                font-size: 16px;
+            }
+            body, html {
+                background-color: #002C2B;
+                color: white;
+            }
+			.container {
+				width: 960px;
+				margin:  2rem auto;
+				text-align: center;
+			}
+
+			.container .grid {
+				display: inline-block;
+				margin: 1rem auto;
+				background-color: whitesmoke;
+			}
+
+			.container .grid .row {
+				display: flex;
+			}
+
+			.container .grid .cell {
+				background-color: transparent;
+				display: inline-block;
+				height: 2rem;
+				width: 2rem;
+				border: 1px solid silver;
+			}
+
+            .container .grid .cell.wall {
+                background-color: grey;
+                border-color: grey;
+            }
+
+            .container .grid .cell.switch {
+                background: radial-gradient(lightgreen, greenyellow);
+                background-size: 50% 50%;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+
+            .container .grid .cell.player {
+                border: 0;
+                border-radius: 50%;
+                background-color: indigo;
+                content: "P";
+            }
+
+            .container .grid .cell.box {
+                background: radial-gradient(red, brown);
+                border-color: brown;
+            }
+		</style>
+    
+    </head>
+
+
+    <body>
+        <div class="container">
+            <h1>Sokoban</h1>
+            <div class="hud">Level 0 / 500</div>
+            <div class="grid" id="grid"></div>
+            <div id="message">
+				<img src="./keys.png" alt="" height="100px">
+				<br>
+				<b>Use arrow keys to move</b>
+			</div>
+        </div>
+
+        <script>
+			// utils
+			function random(min, max) {
+				return Math.floor(Math.random() * (max - min) + min);
+			}
+
+            function remove_class(el, classname) {
+                el.classList.remove(classname);
+            }
+
+            function add_class(el, classname) {
+                el.classList.add(classname);
+            }
+
+            function has_class (el, classname) {
+                return el.classList.contains(classname);
+            }
+
+			function add_matx(m1, m2) {
+				if (m1.length === m2.length) {
+					for(let i = 0; i < m1.length; i++) {
+						m1[i] += m2[i];
+					}
+				}
+
+				return m1;
+            }
+
+            // m1 - m2
+            function matx_diff (m1, m2) {
+                let res = [];
+                if (m1.length === m2.length) {
+                    for (i = 0; i < m1.length; i++) {
+                        res.push(m1[i] - m2[i]);
+                    }
+                } else return false;
+
+                return res;
+            }
+
+			function compare_matx(m1, m2) {
+				let flag = true
+                for(let i = 0; i < m1.length; i++) {
+                    if (m1[i] != m2[i]) {
+                        flag = false;
+                        break;
+                    }
+                }
+
+				return flag;
+			}
+		</script>
+
+        <script src="./script.js"></script>
+    </body>
+    
+</html>
