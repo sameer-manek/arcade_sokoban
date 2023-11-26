@@ -7,7 +7,6 @@ fetch('./levels.json')
 const levels = json;
 var map = levels[current_level];
 
-document.getElementById('current_level').innerHTML = current_level;
 document.getElementById('last_level').innerHTML = levels.length-1;
 
 const cell_types = {
@@ -64,7 +63,9 @@ function draw_level() {
         <b>Use arrow keys to move & Space to reload level</b>
     `;
 
-    console.log({player});
+    // change current level count on screen
+    document.getElementById('current_level').innerHTML = current_level;
+
     END = false;
 }
 
